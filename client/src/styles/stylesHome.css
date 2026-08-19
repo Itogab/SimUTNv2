@@ -83,6 +83,9 @@ kbd{
 }
 
 .eyebrow{
+    display: flex;
+    align-items: center;
+    gap: 6px;
     margin: 0 0 6px;
     font-family: var(--fuente-mono);
     font-size: 0.78rem;
@@ -90,6 +93,11 @@ kbd{
     text-transform: uppercase;
     color: var(--linea-ciano);
     opacity: 0.75;
+}
+
+.eyebrow-icono{
+    display: block;
+    opacity: 0.9;
 }
 
 .titulo{
@@ -110,58 +118,19 @@ kbd{
     opacity: 0.85;
 }
 
-/* ===================== Formulario de legajo (SySACAD) ===================== */
+/* ===================== Identificación del alumno (inyectada por SySACAD) ===================== */
 
-.legajo-form{
-    margin-top: 18px;
-}
-
-.legajo-label{
-    display: block;
-    margin: 0 0 6px;
+.alumno-info{
+    margin: 16px 0 0;
     font-family: var(--fuente-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--linea-ciano);
-    opacity: 0.7;
-}
-
-.legajo-fila{
-    display: flex;
-    gap: 8px;
-}
-
-.legajo-input{
-    font-family: var(--fuente-mono);
-    font-size: 0.9rem;
-    padding: 8px 10px;
-    background: var(--azul-800);
-    border: 1px solid var(--azul-600);
-    border-radius: 3px;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
     color: var(--papel-alto);
-    min-width: 160px;
+    opacity: 0.9;
 }
 
-.legajo-input::placeholder{
-    color: var(--linea-ciano);
-    opacity: 0.5;
-}
-
-.legajo-boton{
-    font-family: var(--fuente-cuerpo);
-    font-weight: 600;
-    font-size: 0.85rem;
-    padding: 8px 16px;
-    background: var(--ambar);
-    color: #2a1c02;
-    border: 1px solid var(--ambar-alto);
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.legajo-boton:hover{
-    background: var(--ambar-alto);
+.alumno-info:empty{
+    display: none;
 }
 
 .legajo-mensaje{
@@ -169,6 +138,10 @@ kbd{
     min-height: 1.2em;
     font-size: 0.8rem;
     color: var(--resalte);
+}
+
+.legajo-mensaje:empty{
+    display: none;
 }
 
 /* ===================== Cuerpo: filas por año ===================== */
@@ -314,7 +287,8 @@ kbd{
 
 /* -- cursada: cursada, con el final pendiente -- */
 .cursada{
-    background: var(--papel);
+    background: var(--papel) url("/images/fondo.png");
+    background-blend-mode: multiply;
     color: var(--grafito);
     border: 1px solid #cfc6a3;
     cursor: pointer;
@@ -341,7 +315,8 @@ kbd{
 
 /* -- aprobada: sello de goma, la firma de la pieza -- */
 .aprobada{
-    background: var(--papel-alto);
+    background: var(--papel-alto) url("/images/fondo.png");
+    background-blend-mode: multiply;
     color: var(--grafito);
     border: 1px solid #cfc6a3;
     cursor: pointer;

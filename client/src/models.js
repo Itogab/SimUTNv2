@@ -1,61 +1,51 @@
 export class Materia {
-  idMateria: string;
-  nombre: string;
-  nivel: number; // 0 = electiva sin año fijo, 1-5 = año de la carrera
-  //El array de correlativas comienza siendo "nulo"
-  correlativas: [Materia[], Materia[]] = [[], []];
-
-  constructor(idMateria: string, nombre: string, nivel: number)
-  {
+  constructor(idMateria, nombre, nivel) {
     this.idMateria = idMateria;
     this.nombre = nombre;
-    this.nivel = nivel;
+    this.nivel = nivel; // 0 = electiva sin año fijo, 1-5 = año de la carrera
+    // El array de correlativas comienza siendo "nulo": [paraCursar, paraAprobar]
+    this.correlativas = [[], []];
   }
 
-  get aprobada(): boolean 
-  {
+  get aprobada() {
     return this.correlativas[1].every((mat) => mat.aprobada);
   }
 
-  set añadir(pCorrelativas: [Materia[], Materia[]]) 
-  {
+  set añadir(pCorrelativas) {
     this.correlativas = pCorrelativas;
   }
 }
 
-// Todas las Materia construidas al arrancar la app (ver construirMaterias en main.ts).
-export const materiasObjetos: Materia[] = [];
+// Todas las Materia construidas al arrancar la app (ver construirMaterias en main.js).
+export const materiasObjetos = [];
 
 export const Alumno = {
-  materiasAprobadas: [] as Materia[],
-  materiasCursadas: [] as Materia[],
+  materiasAprobadas: [],
+  materiasCursadas: [],
 
-  set aproboMateria(pMateria: Materia) 
-  {
+  set aproboMateria(pMateria) {
     if (!this.materiasAprobadas.includes(pMateria)) {
       this.materiasAprobadas.push(pMateria);
     }
   },
 
-  set aproboCursada(pMateria: Materia) 
-  {
+  set aproboCursada(pMateria) {
     if (!this.materiasCursadas.includes(pMateria)) {
       this.materiasCursadas.push(pMateria);
     }
   },
 
-  get materiasPosibles(): Materia[] 
-  {
-    const posibles: Materia[] = [];
+  get materiasPosibles() {
+    const posibles = [];
     for (const materia of materiasObjetos) {
-      //noTomada significa que la materia no está ni en cursadas ni en aprobadas
+      // noTomada significa que la materia no está ni en cursadas ni en aprobadas
       const noTomada =
         !this.materiasAprobadas.includes(materia) && !this.materiasCursadas.includes(materia);
 
-      //sinCorrelativas significa que la materia no tiene correlativas 
+      // sinCorrelativas significa que la materia no tiene correlativas
       const sinCorrelativas = materia.correlativas.every((correl) => correl.length === 0);
-      
-      //devuelve si el alumno esta en condiciones de cursar/aprobar una materia
+
+      // devuelve si el alumno esta en condiciones de cursar/aprobar una materia
       const cumpleCorrelativas =
         materia.correlativas[0].every((correl) => this.materiasCursadas.includes(correl)) &&
         materia.correlativas[1].every((correl) => this.materiasAprobadas.includes(correl));
@@ -67,18 +57,15 @@ export const Alumno = {
     return posibles;
   },
 
-  eliminarMateriaCursada(pMateria: Materia): void 
-  {
+  eliminarMateriaCursada(pMateria) {
     this.materiasCursadas = this.materiasCursadas.filter((materia) => materia !== pMateria);
   },
 
-  eliminarMateriaAprobada(pMateria: Materia): void 
-  {
+  eliminarMateriaAprobada(pMateria) {
     this.materiasAprobadas = this.materiasAprobadas.filter((materia) => materia !== pMateria);
   },
 
-  reiniciarMaterias(): void 
-  {
+  reiniciarMaterias() {
     this.materiasAprobadas = [];
     this.materiasCursadas = [];
   },
