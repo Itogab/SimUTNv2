@@ -1,5 +1,4 @@
 node_modules/
 dist/
-client/demo/
 *.local
 .DS_Store
