@@ -88,3 +88,18 @@ npm run build
 
 Genera `client/dist/` — HTML, CSS, JS e imágenes estáticas, sin ningún dato de alumno embebido.
 Eso es lo que SySACAD debe servir, agregando su propio `<script>` con los datos reales al final.
+
+## Compartir una demo (para que alguien la pruebe sin instalar nada)
+
+```bash
+cd client
+npm run demo
+```
+
+Genera `client/demo/SimUTN-demo.html`: un único archivo HTML autocontenido (CSS, JS e imágenes
+inlineados, sin dependencias externas salvo las tipografías de Google Fonts) con los datos de
+ejemplo de `./data` ya "inyectados" tal como lo haría SySACAD. Se abre con doble clic, sin
+Node, sin servidor, sin conexión al proyecto — se ve y se usa exactamente igual que dentro de
+SySACAD. Ese archivo no se sube al repo (`client/demo/` está en `.gitignore`) porque lleva datos
+reales de ejemplo embebidos: para compartirlo, mandalo directamente (mail, Drive, etc.), no lo
+publiques en un repo público.
