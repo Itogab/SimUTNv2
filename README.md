@@ -42,13 +42,6 @@ del `<body>`, un `<script>` **clásico** (sin `type="module"`) que defina `windo
 </script>
 ```
 
-No importa si ese `<script>` va antes o después de nuestro `<script type="module" src="...">`:
-un script clásico se ejecuta en el momento en que el parser lo encuentra, mientras que uno
-`module` se difiere hasta que termina de parsearse el documento — así que `window.SIMUTN_DATA`
-siempre está listo cuando arranca nuestro código. El contrato completo (con el reshape de
-cursadas/aprobadas) vive en `client/src/datosInyectados.js`; si el día de mañana cambia la forma
-en que SySACAD entrega los datos, ese es el único archivo que debería tocarse.
-
 Si la página se abre sin `window.SIMUTN_DATA` definido (por ejemplo, abriendo el HTML fuera de
 SySACAD), la app muestra un mensaje en vez de romperse.
 
