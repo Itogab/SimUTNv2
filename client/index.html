@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/images/utnLogo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/stylesHome.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sysAlumno — Correlativas UTN</title>
+</head>
+<body>
+    <main class="hoja">
+        <header class="portada">
+            <p class="eyebrow">Plan de estudios · UTN</p>
+            <h1 class="titulo">sysAlumno</h1>
+            <p class="subtitulo">Clic para avanzar el estado de una materia. Clic derecho para retroceder. Tecla <kbd>R</kbd> reinicia todo.</p>
+            <form class="legajo-form" id="legajoForm">
+                <label class="legajo-label" for="legajoInput">Legajo (SySACAD)</label>
+                <div class="legajo-fila">
+                    <input class="legajo-input" id="legajoInput" name="legajo" type="text" placeholder="ej. 20213045" autocomplete="off">
+                    <button class="legajo-boton" type="submit">Cargar</button>
+                </div>
+                <p class="legajo-mensaje" id="legajoMensaje"></p>
+            </form>
+        </header>
+        <div class="wrapper">
+        </div>
+    </main>
+    <aside class="helper">
+        <p class="helper-rotulo">Referencias</p>
+        <div class="leyenda-item bloqueada">Materia Bloqueada</div>
+        <div class="leyenda-item cursada">Aprobó Cursada</div>
+        <div class="leyenda-item aprobada">Aprobó Final</div>
+        <div class="leyenda-item habilitada">Puede Cursar</div>
+        <div class="helper-progreso">
+            <p class="helper-rotulo">Materias aprobadas</p>
+            <div class="contador"></div>
+            <div class="barra"><div class="barra-relleno"></div></div>
+        </div>
+    </aside>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

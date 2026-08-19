@@ -1,0 +1,514 @@
+/* ===================================================================
+   sysAlumno — hoja técnica de correlativas
+   Dirección: papel de dibujo técnico (blueprint) + sello de goma
+   burocrático argentino ("APROBADO") como elemento de firma.
+   =================================================================== */
+
+:root{
+    /* -- color: papel de dibujo técnico -- */
+    --azul-950: #081d33;
+    --azul-900: #0a2540;
+    --azul-800: #0f3059;
+    --azul-700: #163f70;
+    --azul-600: #1f5a8f;
+    --linea-ciano: #8fc7ff;
+    --linea-ciano-tenue: rgba(143, 199, 255, 0.16);
+    --linea-ciano-minima: rgba(143, 199, 255, 0.07);
+
+    /* -- color: papel y tintas -- */
+    --papel: #f2ecda;
+    --papel-alto: #faf6e9;
+    --grafito: #232323;
+    --ambar: #dd9a35;
+    --ambar-alto: #f0b559;
+    --tinta-violeta: #5a2d82;
+    --tinta-violeta-alto: #7a3fae;
+    --resalte: #ff6a3d;
+    --peligro-raya: rgba(255, 138, 61, 0.35);
+
+    --fuente-display: 'Big Shoulders Stencil Display', 'Oswald', sans-serif;
+    --fuente-cuerpo: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+    --fuente-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+    --radio-corte: 10px;
+}
+
+*{ box-sizing: border-box; }
+
+html{
+    min-height: 100vh;
+    background: var(--azul-900);
+}
+
+body{
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    font-family: var(--fuente-cuerpo);
+    color: var(--linea-ciano);
+    background-color: var(--azul-900);
+    background-image:
+        linear-gradient(var(--linea-ciano-tenue) 1px, transparent 1px),
+        linear-gradient(90deg, var(--linea-ciano-tenue) 1px, transparent 1px),
+        linear-gradient(var(--linea-ciano-minima) 1px, transparent 1px),
+        linear-gradient(90deg, var(--linea-ciano-minima) 1px, transparent 1px);
+    background-size: 160px 160px, 160px 160px, 20px 20px, 20px 20px;
+    background-position: -1px -1px;
+}
+
+kbd{
+    font-family: var(--fuente-mono);
+    background: var(--azul-700);
+    border: 1px solid var(--linea-ciano);
+    border-radius: 3px;
+    padding: 0 5px;
+    font-size: 0.85em;
+}
+
+/* ===================== Encabezado / portada ===================== */
+
+.hoja{
+    flex: 1;
+    min-width: 0;
+    padding: 32px clamp(16px, 4vw, 48px) 48px;
+}
+
+.portada{
+    max-width: 62ch;
+    margin-bottom: 28px;
+    border-bottom: 1px dashed var(--azul-600);
+    padding-bottom: 20px;
+}
+
+.eyebrow{
+    margin: 0 0 6px;
+    font-family: var(--fuente-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--linea-ciano);
+    opacity: 0.75;
+}
+
+.titulo{
+    margin: 0 0 10px;
+    font-family: var(--fuente-display);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    letter-spacing: 0.03em;
+    color: var(--papel-alto);
+    line-height: 0.95;
+}
+
+.subtitulo{
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--linea-ciano);
+    opacity: 0.85;
+}
+
+/* ===================== Formulario de legajo (SySACAD) ===================== */
+
+.legajo-form{
+    margin-top: 18px;
+}
+
+.legajo-label{
+    display: block;
+    margin: 0 0 6px;
+    font-family: var(--fuente-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--linea-ciano);
+    opacity: 0.7;
+}
+
+.legajo-fila{
+    display: flex;
+    gap: 8px;
+}
+
+.legajo-input{
+    font-family: var(--fuente-mono);
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    background: var(--azul-800);
+    border: 1px solid var(--azul-600);
+    border-radius: 3px;
+    color: var(--papel-alto);
+    min-width: 160px;
+}
+
+.legajo-input::placeholder{
+    color: var(--linea-ciano);
+    opacity: 0.5;
+}
+
+.legajo-boton{
+    font-family: var(--fuente-cuerpo);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    background: var(--ambar);
+    color: #2a1c02;
+    border: 1px solid var(--ambar-alto);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.legajo-boton:hover{
+    background: var(--ambar-alto);
+}
+
+.legajo-mensaje{
+    margin: 8px 0 0;
+    min-height: 1.2em;
+    font-size: 0.8rem;
+    color: var(--resalte);
+}
+
+/* ===================== Cuerpo: filas por año ===================== */
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 18px;
+}
+
+.anio{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 26px;
+    animation: desenrollar 0.5s ease-out both;
+    animation-delay: calc(var(--indice-anio, 0) * 90ms);
+}
+
+.anio::before{
+    content: "AÑO " attr(data-anio);
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: var(--fuente-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    color: var(--linea-ciano);
+    opacity: 0.6;
+}
+
+.anio.electivas::before{
+    content: "ELECTIVAS";
+}
+
+.anio::after{
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 68px;
+    right: 0;
+    height: 1px;
+    background: var(--linea-ciano-tenue);
+}
+
+@keyframes desenrollar{
+    from{ opacity: 0; transform: translateY(-6px); }
+    to{ opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .anio{ animation: none; }
+}
+
+/* ===================== Fichas de materia ===================== */
+
+.materia{
+    position: relative;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.25;
+    padding: 16px 12px 12px;
+    width: 168px;
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    user-select: none;
+    border-radius: 3px;
+    clip-path: polygon(0 0, calc(100% - var(--radio-corte)) 0, 100% var(--radio-corte), 100% 100%, 0 100%);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.materia::before{
+    content: attr(data-tag);
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    font-family: var(--fuente-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    opacity: 0.55;
+}
+
+/* -- bloqueada: panel de dibujo apagado, sin acceso -- */
+.bloqueada{
+    background: var(--azul-800);
+    color: var(--linea-ciano);
+    border: 1px dashed var(--azul-600);
+}
+
+.materia.bloqueada{
+    opacity: 0.6;
+}
+
+.materia.bloqueada{
+    background-image: repeating-linear-gradient(
+        135deg,
+        var(--peligro-raya) 0 6px,
+        transparent 6px 12px
+    );
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: top right;
+}
+
+/* -- habilitada: ficha de papel resaltada, lista para cursar -- */
+.habilitada{
+    background: var(--ambar);
+    color: #2a1c02;
+    border: 1px solid var(--ambar-alto);
+    cursor: pointer;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.18);
+}
+
+/* .materia usa filter en vez de box-shadow: el clip-path de la esquina
+   cortada recorta cualquier pintura que caiga fuera de la caja. */
+.materia.habilitada{
+    box-shadow: none;
+    filter: drop-shadow(0 2px 0 rgba(0,0,0,0.18));
+}
+
+.materia.habilitada::after{
+    content: "▶";
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    font-size: 0.7rem;
+    opacity: 0.55;
+}
+
+.habilitada:hover{
+    transform: translateY(-2px);
+}
+
+.materia.habilitada:hover{
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.28));
+}
+
+/* -- cursada: cursada, con el final pendiente -- */
+.cursada{
+    background: var(--papel);
+    color: var(--grafito);
+    border: 1px solid #cfc6a3;
+    cursor: pointer;
+}
+
+.materia.cursada::after{
+    content: "final pendiente";
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    font-family: var(--fuente-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.02em;
+    color: #7a7147;
+}
+
+.cursada:hover{
+    transform: translateY(-2px);
+}
+
+.materia.cursada:hover{
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.22));
+}
+
+/* -- aprobada: sello de goma, la firma de la pieza -- */
+.aprobada{
+    background: var(--papel-alto);
+    color: var(--grafito);
+    border: 1px solid #cfc6a3;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.materia.aprobada::after{
+    content: "✓ APROBADO";
+    position: absolute;
+    right: -14px;
+    bottom: 10px;
+    padding: 3px 14px;
+    font-family: var(--fuente-mono);
+    font-weight: 600;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    color: var(--tinta-violeta);
+    border: 2px solid var(--tinta-violeta);
+    border-radius: 3px;
+    transform: rotate(-9deg);
+    mix-blend-mode: multiply;
+    opacity: 0.82;
+    animation: sellar 260ms ease-out both;
+}
+
+@keyframes sellar{
+    0%{ transform: rotate(-9deg) scale(2.2); opacity: 0; }
+    70%{ opacity: 0.9; }
+    100%{ transform: rotate(-9deg) scale(1); opacity: 0.82; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .materia.aprobada::after{ animation: none; }
+}
+
+/* -- resaltado al pasar el mouse: qué se desbloquearía --
+   outline-offset debe ser negativo: el clip-path del corte de esquina
+   recorta cualquier pintura fuera de la caja, incluido un outline saliente. */
+.podriaCursar{
+    outline: 2px dashed var(--resalte);
+    outline-offset: -4px;
+}
+
+/* -- foco de teclado visible --
+   .materia usa offset negativo por el mismo motivo que .podriaCursar. */
+.materia:focus-visible{
+    outline: 2px solid var(--resalte);
+    outline-offset: -4px;
+}
+
+.leyenda-item:focus-visible{
+    outline: 2px solid var(--resalte);
+    outline-offset: 2px;
+}
+
+/* ===================== Panel lateral / cajetín ===================== */
+
+.helper{
+    flex: 0 0 auto;
+    width: 236px;
+    margin: 32px 24px 32px 0;
+    padding: 18px 16px;
+    background: var(--azul-800);
+    border: 1px solid var(--azul-600);
+    border-radius: 3px;
+    position: sticky;
+    top: 32px;
+}
+
+.helper-rotulo{
+    margin: 0 0 10px;
+    font-family: var(--fuente-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--linea-ciano);
+    opacity: 0.7;
+    border-bottom: 1px solid var(--azul-600);
+    padding-bottom: 8px;
+}
+
+.leyenda-item{
+    box-sizing: content-box;
+    font-family: var(--fuente-cuerpo);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: left;
+    user-select: none;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    border-radius: 3px;
+    position: relative;
+    padding-left: 26px;
+}
+
+.leyenda-item::before{
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+}
+
+.leyenda-item.aprobada::before{
+    background: var(--tinta-violeta);
+    opacity: 1;
+}
+
+.leyenda-item.aprobada{
+    border-left: 3px solid var(--tinta-violeta);
+}
+
+.leyenda-item.cursada{
+    border-left: 3px solid #cfc6a3;
+}
+
+.helper-progreso{
+    margin-top: 16px;
+}
+
+.contador{
+    font-family: var(--fuente-mono);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--papel-alto);
+}
+
+.barra{
+    margin-top: 8px;
+    height: 8px;
+    background: var(--azul-700);
+    border: 1px solid var(--azul-600);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.barra-relleno{
+    height: 100%;
+    width: var(--progreso, 0%);
+    background: var(--ambar);
+    transition: width 260ms ease;
+}
+
+/* ===================== Responsive ===================== */
+
+@media (max-width: 760px){
+    body{
+        flex-direction: column;
+    }
+
+    .helper{
+        position: static;
+        width: auto;
+        margin: 0 16px 24px;
+    }
+
+    .hoja{
+        order: 2;
+        padding: 24px 16px 40px;
+    }
+
+    .materia{
+        width: calc(50% - 5px);
+    }
+}
